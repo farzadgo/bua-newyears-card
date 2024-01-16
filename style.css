@@ -1,0 +1,90 @@
+* {
+  box-sizing: border-box;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  /* background-color: black; */
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  cursor: none;
+}
+
+#app {
+  overflow: hidden;
+}
+
+.upper,
+.lower {
+  height: 50vh;
+  width: 140%;
+  position: relative;
+  overflow: visible;
+  z-index: 10;
+}
+.upper {
+  /* border: 10px solid tomato; */
+  left: -20vw;
+}
+.lower {
+  /* border: 10px solid dodgerblue; */
+  bottom: 0;
+  left: -20vw;
+  transform: rotate(180deg);
+}
+
+.upper img,
+.lower img {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  transition: all 2 ease-in-out;
+  filter: drop-shadow(0 8px 4px rgba(0, 0, 0, 0.8));
+}
+
+.mouse-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  width: 60vw;
+  transform: rotate(-10deg);
+}
+
+.welcome,
+.message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 20;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  line-height: 1.5;
+  transition: opacity 2s ease-in-out;
+}
+.welcome {
+  padding: 15px 25px;
+  box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.8);
+  opacity: 1;
+  background: #fff;
+}
+
+.message {
+  font-size: 1.5rem;
+  z-index: 5;
+  box-shadow: none;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 0;
+}
+.message > *:first-child {
+  font-size: 2rem;
+  font-weight: bold;
+}
