@@ -1,7 +1,5 @@
 import './style.css';
-// import javascriptLogo from './javascript.svg';
-// import viteLogo from '/vite.svg';
-// import { setupCounter } from './counter.js';
+
 import anime from 'animejs/lib/anime.es.js';
 import confetti from 'canvas-confetti';
 
@@ -23,7 +21,7 @@ let images = [
   fringe_06
 ];
 
-let counter = 0;
+let counter = 1;
 let achieved = false;
 
 const container = document.querySelector('#app');
@@ -79,6 +77,7 @@ const animateStick = () => {
 const insertElements = (arr, div) => {
   arr.forEach((img, i) => {
     const imgElem = document.createElement('img');
+    imgElem.setAttribute('loading', 'lazy');
     imgElem.src = img;
     imgElem.style.bottom = `${((i * 50) - 40)}px`;
     div.appendChild(imgElem);
@@ -141,7 +140,7 @@ document.addEventListener('mousemove', (e) => {
   const x = e.clientX;
   const y = e.clientY;
 
-  mouseImg.style.left = `calc(${x}px - 55vw)`;
+  mouseImg.style.left = `calc(${x}px - 52vw)`;
   mouseImg.style.top = `${y - 20}px`;
 });
 
@@ -152,4 +151,3 @@ document.addEventListener('touchmove', (e) => {
   mouseImg.style.left = `calc(${x}px - 55vw)`;
   mouseImg.style.top = `${y - 20}px`;
 });
-
