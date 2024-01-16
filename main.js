@@ -54,7 +54,8 @@ container.appendChild(messageDiv);
 
 
 let aspectRatio = window.innerWidth / window.innerHeight;
-let fringeLimit = Math.ceil(images.length / aspectRatio);
+// let fringeLimit = Math.ceil(images.length / aspectRatio);
+let fringeLimit = 12;
 
 for (let i = 0; i < fringeLimit - images.length; i++) images.push(images[i]);
 
