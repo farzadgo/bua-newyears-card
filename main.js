@@ -3,14 +3,18 @@ import './style.css';
 import anime from 'animejs/lib/anime.es.js';
 import confetti from 'canvas-confetti';
 
-import fringe_01 from './src/assets/element-a1.png';
-import fringe_02 from './src/assets/element-a2.png';
-import fringe_03 from './src/assets/element-b1.png';
-import fringe_04 from './src/assets/element-b2.png';
-import fringe_05 from './src/assets/element-c1.png';
-import fringe_06 from './src/assets/element-c2.png';
+import fringe_01 from './src/assets/element-a1.webp';
+import fringe_02 from './src/assets/element-a2.webp';
+import fringe_03 from './src/assets/element-b1.webp';
+import fringe_04 from './src/assets/element-b2.webp';
+import fringe_05 from './src/assets/element-c1.webp';
+import fringe_06 from './src/assets/element-c2.webp';
 
-import stick from './src/assets/noun-stick.svg';
+import stick from './src/assets/noun-pointer.svg';
+import schlag from './src/assets/Schlag.wav';
+import tadaal from './src/assets/TadaaI.wav';
+import tadaall from './src/assets/TadaaII.wav';
+import rascheln from './src/assets/Rascheln.wav';
 
 let images = [
   fringe_01,
@@ -19,6 +23,28 @@ let images = [
   fringe_04,
   fringe_05,
   fringe_06
+];
+
+const sounds = {
+  schlag: new Audio(schlag),
+  tadaal: new Audio(tadaal),
+  tadaall: new Audio(tadaall),
+  rascheln: new Audio(rascheln),
+};
+
+
+
+let newYearWishes = [
+  { quote: "Wir wünschen uns eine Welt, in der jede Person so sein darf, wie sie möchte.", person: "Anonymous" },
+  { quote: "Ein glückliches und gesundes neues Jahr!", person: "Anonymous" },
+  { quote: "Alles Gute für das neue Jahr!", person: "Anonymous" },
+  { quote: "Möge das neue Jahr dir Freude und Erfolg bringen!", person: "Anonymous" },
+  { quote: "Ein erfolgreiches und glückliches neues Jahr!", person: "Anonymous" },
+  { quote: "Viel Glück und Gesundheit im neuen Jahr!", person: "Anonymous" },
+  { quote: "Möge das neue Jahr all deine Wünsche erfüllen!", person: "Anonymous" },
+  { quote: "Ein frohes und gesegnetes neues Jahr!", person: "Anonymous" },
+  { quote: "Auf ein fantastisches neues Jahr!", person: "Anonymous" },
+  { quote: "Ein glückliches neues Jahr voller neuer Chancen!", person: "Anonymous" }
 ];
 
 let counter = 1;
@@ -39,21 +65,47 @@ container.appendChild(mouseImg);
 
 const welcomeDiv = document.createElement('div');
 welcomeDiv.classList.add('welcome');
-welcomeDiv.innerHTML = 'Klicke so lange, bis sich die Piñata für dich öffnet';
+welcomeDiv.innerHTML = 'Öffne die Piñata durch Klicken';
 container.appendChild(welcomeDiv);
+
+const containerDiv = document.createElement('div');
+containerDiv.classList.add('container');
+container.appendChild(containerDiv);
+
+const headerDiv = document.createElement('div');
+headerDiv.classList.add('header');
+headerDiv.innerHTML = `
+  <img src="./src/assets/B&A_Logo_RGB.svg" alt="Bas & Aer Logo" />
+  <p> Everything is better together </p>
+`;
+containerDiv.appendChild(headerDiv);
+
 
 const messageDiv = document.createElement('div');
 messageDiv.classList.add('message');
+let randomWish = newYearWishes[Math.floor(Math.random() * newYearWishes.length)];
 messageDiv.innerHTML = `
-  <p> Have a beautiful and surprising 2024 </p>
-  <p> Bas & Aer </p>
+  <p>${randomWish.quote}</p>
+  <p>- ${randomWish.person}</p>
 `;
-container.appendChild(messageDiv);
+
+containerDiv.appendChild(messageDiv);
+
+
+const footerDiv = document.createElement('div');
+footerDiv.classList.add('footer');
+footerDiv.innerHTML = `
+  <p> Join us, work with us, say hello</p>
+  <a href="https://www.basandaer.com" target="_blank"> www.basandaer.com </a>
+`;
+containerDiv.appendChild(footerDiv);
+
+
 
 
 let aspectRatio = window.innerWidth / window.innerHeight;
 // let fringeLimit = Math.ceil(images.length / aspectRatio);
-let fringeLimit = 12;
+let fringeLimit = 14;
 
 for (let i = 0; i < fringeLimit - images.length; i++) images.push(images[i]);
 
@@ -100,7 +152,7 @@ const updateElements = (div) => {
   });
 
   // console.log(div.childNodes[0].getBoundingClientRect().y);
-  if (div.childNodes[0].getBoundingClientRect().y < 0) achieved = true;
+  if (div.childNodes[0].getBoundingClientRect().y < (window.innerHeight * 0.01)) achieved = true;
 }
 
 
@@ -123,6 +175,18 @@ container.addEventListener('click', () => {
   animateStick();
   if (counter) welcomeDiv.style.opacity = '0';
 
+ 
+  const newHitSound = new Audio(sounds['schlag'].src);
+  newHitSound.currentTime = 0;
+  newHitSound.play();
+
+  if (!achieved) {
+    const newMoveSound = new Audio(sounds['rascheln'].src);
+    newMoveSound.volume = 0.1;
+    newMoveSound.currentTime = 0;
+    newMoveSound.play();
+  }
+
   if (achieved) {
     confetti({
       angle: randomInRange(40, 130),
@@ -130,6 +194,9 @@ container.addEventListener('click', () => {
       particleCount: randomInRange(50, 100),
       colors: ['CF2F26', '000000', 'E3D26F', 'E88EED', 'DEF6CA']
     });
+
+    const tadaaSound = Math.random() > 0.5 ? sounds.tadaal : sounds.tadaall;
+    tadaaSound.play();
 
     messageDiv.style.opacity = '1';
   }
@@ -140,14 +207,14 @@ document.addEventListener('mousemove', (e) => {
   const x = e.clientX;
   const y = e.clientY;
 
-  mouseImg.style.left = `calc(${x}px - 52vw)`;
+  mouseImg.style.left = `calc(${x}px - 42vw)`;
   mouseImg.style.top = `${y - 20}px`;
 });
-
+ 
 document.addEventListener('touchmove', (e) => {
   const x = e.touches[0].clientX;
   const y = e.touches[0].clientY;
 
-  mouseImg.style.left = `calc(${x}px - 55vw)`;
+  mouseImg.style.left = `calc(${x}px - 42dvw)`;
   mouseImg.style.top = `${y - 20}px`;
 });

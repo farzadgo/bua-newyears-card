@@ -7,12 +7,40 @@
   user-select: none;
 }
 
+@font-face {
+  font-family: 'Apercu';
+    src: url('./src/assets/apercu-medium.woff2') format('woff2');  
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tagada';
+  src: url('./src/assets/Tagada-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --font-small: 1.2rem;
+  --font-medium: 1.6rem;
+  --font-big: 3rem;
+}
+@media (max-height: 680px) {
+  :root {
+  --font-small: 1rem;
+  --font-medium: 1.2rem;
+  --font-big: 2.6rem;
+  }
+}
+
 body {
   background-color: black;
   margin: 0;
   height: 100vh;
   width: 100vw;
   cursor: none;
+  font-family: "Tagada", sans-serif;
 }
 
 #app {
@@ -20,6 +48,9 @@ body {
   margin: 0 auto;
   background-color: #F5EAEA;
   position: relative;
+  background-image: url('./src/assets/background.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .upper,
@@ -54,44 +85,66 @@ body {
   left: 0;
   z-index: 30;
   /* width: 60vw; */
-  width: 60%;
+  width: 40%;
   transform: rotate(-10deg);
+
 }
 
+.container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  position: absolute;
+  align-items: center;
+  width: 100%;
+  height: 100dvh;
+  padding: 12dvh 8dvw;
+  line-height: 1;
+}
+
+.container .header, .container .footer {
+  text-align: center;
+  font-size: var(--font-medium);
+}
+
+.container .header img {
+  width: 40dvw;
+}
+.container .header p {
+  margin-top: -10px;
+}
+
+
+.container a {
+  font-family: "apercu", sans-serif;
+  color: black;
+  text-decoration: none;
+  font-size: var(--font-small);
+}
 .welcome,
 .message {
+  text-align: center;
+}
+.welcome {
   position: absolute;
   top: 50%;
   left: 50%;
-  z-index: 20;
   transform: translate(-50%, -50%);
-  text-align: center;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  line-height: 1.5;
-  transition: opacity 2s ease-in-out;
-  width: 80%;
-}
-.welcome {
   padding: 15px 25px;
   box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.8);
   opacity: 1;
-  background: #F5EAEA;
+  background: #ffc94b;
+  z-index: 20;
+  transition: opacity 1s ease-in-out;
 }
 
 .message {
-  font-size: 1.5rem;
-  z-index: 5;
-  box-shadow: none;
-  height: 60vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  font-size: var(--font-big);
   opacity: 0;
+  transition: opacity 1s ease-in-out;
+
 }
-.message > *:first-child {
-  font-size: 2rem;
-  font-weight: bold;
-}
+
 
 @media (min-width: 600px) {
   #app {
