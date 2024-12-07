@@ -87,7 +87,6 @@ body {
   /* width: 60vw; */
   width: 40%;
   transform: rotate(-10deg);
-
 }
 
 .container {
@@ -149,5 +148,8 @@ body {
 @media (min-width: 600px) {
   #app {
     max-width: 600px;
+  }
+  .container .header img {
+    width: 250px;
   }
 }
