@@ -9,7 +9,7 @@ import fringe_03 from './src/assets/element-b1.webp';
 import fringe_04 from './src/assets/element-b2.webp';
 import fringe_05 from './src/assets/element-c1.webp';
 import fringe_06 from './src/assets/element-c2.webp';
-
+import logo from './src/assets/B&A_Logo_RGB.svg';
 import stick from './src/assets/noun-pointer.svg';
 import schlag from './src/assets/Schlag.wav';
 import tadaal from './src/assets/TadaaI.wav';
@@ -72,14 +72,18 @@ const containerDiv = document.createElement('div');
 containerDiv.classList.add('container');
 container.appendChild(containerDiv);
 
+const logoElement = document.createElement('img');
+logoElement.src = logo;
+
+const subtitleElement = document.createElement('p');
+subtitleElement.innerHTML = 'Everything is better together';
+
 const headerDiv = document.createElement('div');
 headerDiv.classList.add('header');
-headerDiv.innerHTML = `
-  <img src="./src/assets/B&A_Logo_RGB.svg" alt="Bas & Aer Logo" />
-  <p> Everything is better together </p>
-`;
-containerDiv.appendChild(headerDiv);
 
+headerDiv.appendChild(logoElement);
+headerDiv.appendChild(subtitleElement);
+containerDiv.appendChild(headerDiv);
 
 const messageDiv = document.createElement('div');
 messageDiv.classList.add('message');
@@ -100,10 +104,7 @@ footerDiv.innerHTML = `
 `;
 containerDiv.appendChild(footerDiv);
 
-
-
-
-let aspectRatio = window.innerWidth / window.innerHeight;
+// let aspectRatio = window.innerWidth / window.innerHeight;
 // let fringeLimit = Math.ceil(images.length / aspectRatio);
 let fringeLimit = 14;
 
