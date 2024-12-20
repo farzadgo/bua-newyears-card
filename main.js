@@ -35,17 +35,18 @@ const sounds = {
 
 
 let newYearWishes = [
-  { quote: "Wir wünschen uns eine Welt, in der jede Person so sein darf, wie sie möchte.", person: "Anonymous" },
-  { quote: "Ein glückliches und gesundes neues Jahr!", person: "Anonymous" },
-  { quote: "Alles Gute für das neue Jahr!", person: "Anonymous" },
+  { quote: "Wann, wenn nicht jetzt?", person: "Christian" },
+  { quote: "Mono(tasking) statt Multi(tasking).", person: "Eva" },
+  { quote: "Wir wünschen uns eine Welt, in der jede Person so sein darf, wie sie möchte.", person: "Judith & Hannah" },
+  { quote: "Ich wünsche euch immer ausreichend Eiscreme im Kühlschrank (am Besten Vanille – für Affogato).", person: "Liz" },
+  { quote: "Pause vom Bullshit Bingo!", person: "Leefje" },
+  { quote: "Do not overthink it too much, and just go for it, and trust the process-", person: "Pauline" },
   { quote: "Möge das neue Jahr dir Freude und Erfolg bringen!", person: "Anonymous" },
   { quote: "Ein erfolgreiches und glückliches neues Jahr!", person: "Anonymous" },
   { quote: "Viel Glück und Gesundheit im neuen Jahr!", person: "Anonymous" },
-  { quote: "Möge das neue Jahr all deine Wünsche erfüllen!", person: "Anonymous" },
-  { quote: "Ein frohes und gesegnetes neues Jahr!", person: "Anonymous" },
-  { quote: "Auf ein fantastisches neues Jahr!", person: "Anonymous" },
-  { quote: "Ein glückliches neues Jahr voller neuer Chancen!", person: "Anonymous" }
+  { quote: "Möge das neue Jahr all deine Wünsche erfüllen!", person: "Anonymous" }
 ];
+
 
 let counter = 1;
 let achieved = false;
