@@ -11,10 +11,10 @@ import fringe_05 from './src/assets/element-c1.webp';
 import fringe_06 from './src/assets/element-c2.webp';
 import logo from './src/assets/B&A_Logo_RGB.svg';
 import stick from './src/assets/noun-pointer.svg';
-import schlag from './src/assets/Schlag.wav';
-import tadaal from './src/assets/TadaaI.wav';
-import tadaall from './src/assets/TadaaII.wav';
-import rascheln from './src/assets/Rascheln.wav';
+import schlag from './src/assets/Schlag.mp3';
+import tadaal from './src/assets/TadaaI.mp3';
+import tadaall from './src/assets/TadaaII.mp3';
+import rascheln from './src/assets/Rascheln.mp3';
 
 let images = [
   fringe_01,
@@ -183,7 +183,7 @@ container.addEventListener('click', () => {
 
   if (!achieved) {
     const newMoveSound = new Audio(sounds['rascheln'].src);
-    newMoveSound.volume = 0.1;
+    newMoveSound.volume = 0.05;
     newMoveSound.currentTime = 0;
     newMoveSound.play();
   }
