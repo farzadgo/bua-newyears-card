@@ -9,12 +9,13 @@ import fringe_03 from './src/assets/element-b1.webp';
 import fringe_04 from './src/assets/element-b2.webp';
 import fringe_05 from './src/assets/element-c1.webp';
 import fringe_06 from './src/assets/element-c2.webp';
+import welcomeBackground from './src/assets/250108_NK_Schild_ah.svg';
 import logo from './src/assets/B&A_Logo_RGB.svg';
 import stick from './src/assets/noun-pointer.svg';
-import schlag from './src/assets/Schlag.mp3';
+import schlag from './src/assets/Schlag-s.mp3';
 import tadaal from './src/assets/TadaaI.mp3';
 import tadaall from './src/assets/TadaaII.mp3';
-import rascheln from './src/assets/Rascheln.mp3';
+import rascheln from './src/assets/Rascheln-v.mp3';
 
 let images = [
   fringe_01,
@@ -32,20 +33,31 @@ const sounds = {
   rascheln: new Audio(rascheln),
 };
 
+sounds['rascheln'].volume = 0.4;
 
 
 let newYearWishes = [
-  { quote: "Wann, wenn nicht jetzt?", person: "Christian" },
-  { quote: "Mono(tasking) statt Multi(tasking).", person: "Eva" },
-  { quote: "Wir wünschen uns eine Welt, in der jede Person so sein darf, wie sie möchte.", person: "Judith & Hannah" },
-  { quote: "Ich wünsche euch immer ausreichend Eiscreme im Kühlschrank (am Besten Vanille – für Affogato).", person: "Liz" },
-  { quote: "Pause vom Bullshit Bingo!", person: "Leefje" },
-  { quote: "Do not overthink it too much, and just go for it, and trust the process-", person: "Pauline" },
-  { quote: "Möge das neue Jahr dir Freude und Erfolg bringen!", person: "Anonymous" },
-  { quote: "Ein erfolgreiches und glückliches neues Jahr!", person: "Anonymous" },
-  { quote: "Viel Glück und Gesundheit im neuen Jahr!", person: "Anonymous" },
-  { quote: "Möge das neue Jahr all deine Wünsche erfüllen!", person: "Anonymous" }
+  { quote: "Wann, wenn nicht jetzt?" },
+  { quote: "Mono(tasking) statt Multi(tasking)." },
+  { quote: "Wir wünschen uns eine Welt, in der jede Person so sein darf, wie sie möchte." },
+  { quote: "Im Winter immer warme Finger und im Sommer ausreichend Eiscreme im Kühlschrank!" },
+  { quote: "Pause vom Bullshit Bingo!" },
+  { quote: "Wenn es nicht okay ist, ist das auch okay." },
+  { quote: "Finde raus, was zu tun ist, gehe raus und mache die Arbeit!" },
+  { quote: "May creativity flow endlessly." },
+  { quote: "Selbst kleine Änderungen von Ausgangssituationen können zu radikal anderen Endzuständen führen." },
+  { quote: "Für 2025 eine ausgewogene Mischung aus Aufregung und Stabilität." },
+  { quote: "Stark machen und gemeinsam mit Spaß weiterhin auf Reise sein." },
+  { quote: "Falling is reverse flying – flying is reverse falling. Safe landings!" },
+  { quote: "Wie ist ein friedliches Zusammenleben in Vielfalt auf einem begrenzten Planeten möglich?" },
+  { quote: "Immer ein kleines kühles Getränk, voluminöses Haar und dass wir uns bald mal live sehen!" },
+  { quote: "Mut, auch mal Nein zu sagen und anzuecken!" },
+  { quote: "Ich wünsche mir das Durchbrechen oder Anheben von Glasdeckeln. Mehr Leichtigkeit!" },
+  { quote: "Stell dir vor, es würde dir stets ein Ventilator frische Luft entgegenblasen." },
+  { quote: "Wir wünschen Allen ein gelassenes Rudern!" },
+  { quote: "Aprender a estar quieta." },
 ];
+
 
 
 let counter = 1;
@@ -66,7 +78,7 @@ container.appendChild(mouseImg);
 
 const welcomeDiv = document.createElement('div');
 welcomeDiv.classList.add('welcome');
-welcomeDiv.innerHTML = 'Öffne die Piñata durch Klicken';
+welcomeDiv.innerHTML = 'The Pinata 2025</br> Click to open';
 container.appendChild(welcomeDiv);
 
 const containerDiv = document.createElement('div');
@@ -89,9 +101,9 @@ containerDiv.appendChild(headerDiv);
 const messageDiv = document.createElement('div');
 messageDiv.classList.add('message');
 let randomWish = newYearWishes[Math.floor(Math.random() * newYearWishes.length)];
+//let randomWish = newYearWishes[8];
 messageDiv.innerHTML = `
   <p>${randomWish.quote}</p>
-  <p>- ${randomWish.person}</p>
 `;
 
 containerDiv.appendChild(messageDiv);
@@ -101,7 +113,7 @@ const footerDiv = document.createElement('div');
 footerDiv.classList.add('footer');
 footerDiv.innerHTML = `
   <p> Join us, work with us, say hello</p>
-  <a href="https://www.basandaer.com" target="_blank"> www.basandaer.com </a>
+  <a href="https://www.basundaer.de" target="_blank"> www.basundaer.de </a>
 `;
 containerDiv.appendChild(footerDiv);
 
@@ -147,14 +159,13 @@ const updateElements = (div) => {
       targets: img,
       rotate: `${Math.floor(Math.random() * 10)-5}deg`,
       translateY: `${(counter * -20) / ((i * 0.05) + 0.8)}px`,
-      duration: 400,
+      duration: 600,
       easing: 'easeInOutSine',
       direction: 'alternate',
     });
   });
 
-  // console.log(div.childNodes[0].getBoundingClientRect().y);
-  if (div.childNodes[0].getBoundingClientRect().y < (window.innerHeight * 0.01)) achieved = true;
+  if (div.childNodes[0].getBoundingClientRect().y < -(div.childNodes[0].getBoundingClientRect().height * 0.4)) achieved = true;
 }
 
 
@@ -170,23 +181,26 @@ function randomInRange(min, max) {
 // --- event listeners ---
 
 container.addEventListener('click', () => {
-  updateElements(upperDiv);
-  updateElements(lowerDiv);
+
 
   setCounter(counter + 1);
   animateStick();
   if (counter) welcomeDiv.style.opacity = '0';
 
- 
+  //playSound('schlag');
   const newHitSound = new Audio(sounds['schlag'].src);
   newHitSound.currentTime = 0;
-  newHitSound.play();
+  newHitSound.play(); 
 
   if (!achieved) {
-    const newMoveSound = new Audio(sounds['rascheln'].src);
-    newMoveSound.volume = 0.05;
-    newMoveSound.currentTime = 0;
-    newMoveSound.play();
+    setTimeout(() => {
+      const newMoveSound = new Audio(sounds['rascheln'].src);
+      newMoveSound.volume = 0.05;
+      newMoveSound.currentTime = 0;
+      newMoveSound.play(); 
+      updateElements(upperDiv);
+      updateElements(lowerDiv);
+    }, 200); // 200 milliseconds delay (adjust this value as needed)
   }
 
   if (achieved) {
@@ -220,3 +234,18 @@ document.addEventListener('touchmove', (e) => {
   mouseImg.style.left = `calc(${x}px - 42dvw)`;
   mouseImg.style.top = `${y - 20}px`;
 });
+
+// Prevent pinch-to-zoom and double-tap to zoom, but allow normal clicks
+document.body.addEventListener('touchstart', function(event) {
+  // Disable zooming by checking if there are two touch points (pinch-to-zoom)
+  if (event.touches.length > 1) {
+      event.preventDefault(); // Prevent zooming behavior
+  }
+}, { passive: false });
+
+document.body.addEventListener('touchmove', function(event) {
+  // Prevent zooming when there are multiple touch points (pinch-to-zoom)
+  if (event.touches.length > 1) {
+      event.preventDefault(); // Prevent zooming behavior
+  }
+}, { passive: false });

@@ -24,14 +24,28 @@
 :root {
   --font-small: 1.2rem;
   --font-medium: 1.6rem;
-  --font-big: 3rem;
+  --font-big: 2rem;
 }
 @media (max-height: 680px) {
   :root {
   --font-small: 1rem;
   --font-medium: 1.2rem;
-  --font-big: 2.6rem;
+  --font-big: 2rem;
   }
+}
+
+body, input, textarea, select {
+  touch-action: manipulation;
+  -webkit-user-select: none; /* Safari-specific */
+  -ms-touch-action: manipulation;
+}
+
+html, body {
+  overscroll-behavior: none; /* Prevents additional gestures from triggering */
+}
+
+input, textarea, select {
+  font-size: 16px; /* iOS avoids zooming for inputs with this size or larger */
 }
 
 body {
@@ -41,6 +55,7 @@ body {
   width: 100dvw;
   cursor: none;
   font-family: "Tagada", sans-serif;
+  overflow: hidden;
 }
 
 #app {
@@ -123,17 +138,27 @@ body {
 .welcome,
 .message {
   text-align: center;
+
 }
 .welcome {
+  font-size: var(--font-medium);
+  background-image: url('src/assets/250108_NK_Schild_ah.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  min-height: 200px;
+  width: 200px;
   padding: 15px 25px;
-  box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.8);
+  /*box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.8);*/
   opacity: 1;
-  background: #ffc94b;
+  /*background: #ffc94b;*/
   z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: opacity 1s ease-in-out;
 }
 
@@ -153,3 +178,4 @@ body {
     width: 250px;
   }
 }
+
